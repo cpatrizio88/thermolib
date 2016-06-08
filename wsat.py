@@ -71,11 +71,11 @@ def wsat(Temp, press):
     elif esIsVect:
         theWs = [(c.eps * i/ (press - i)) for i in es]
         # Limit ws values so rootfinder doesn't blow up.       
-        theWs = list(replaceelem(theWs,0,0.060))
+        #theWs = list(replaceelem(theWs,0,0.060))
     elif pressIsVect:
         theWs = [(c.eps * es/ (i - es)) for i in press]
         # Limit ws values so rootfinder doesn't blow up.       
-        theWs = list(replaceelem(theWs,0,0.060))
+        #theWs = list(replaceelem(theWs,0,0.060))
     else: # Neither 'es' nor 'press' in a vector.
         theWs = (c.eps * es/ (press - es))
         # Limit ws value so rootfinder doesn't blow up.
