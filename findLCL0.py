@@ -50,7 +50,8 @@ def findLCL0(wv, press0, temp0):
     Td = Tdfind(wv, press0)
     
     if (Td >= temp0):
-        raise NameError('parcel is saturated at this pressure')
+        #raise NameError('parcel is saturated at this pressure')
+        return press0, temp0
     
     theta0 = theta(temp0, press0, wv)
    

@@ -11,7 +11,7 @@ class constants:
    eps = 0.622;
    p0 = 1.e5;
    eps = 0.622;
-   lv0 = 2.264e6; # latent heat of vaporization of water J/kg
+   lv0 = 2.257e6; # latent heat of vaporization of water J/kg
    lf = 3.34e5; # latent heat of fusion of water J/kg
    Rv = 461.50; # J/kg/K
    Rd = 287.04; # J/kg/K

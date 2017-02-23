@@ -100,8 +100,7 @@ def findTmoist(thetaE0, press):
         for i in press:            
             # This assumes that the dewpoint is somewherebetween 
             # 250K and 350K.
-            Temp.append(optimize.zeros.brenth(thetaEchange, 100, \
-                                                 370, (thetaE0, i)), maxiter=10000);
+            Temp.append(optimize.zeros.brenth(thetaEchange, 100, 370, (thetaE0, i), maxiter=10000))
             #{'in Tmoist: ',i, result(i)}  
         
     return Temp

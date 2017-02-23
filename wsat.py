@@ -69,11 +69,13 @@ def wsat(Temp, press):
     if esIsVect and pressIsVect:
         raise IOError, "Can't have two vector inputs."
     elif esIsVect:
-        theWs = [(c.eps * i/ (press - i)) for i in es]
+        theWs = c.eps*es/(press - es)
+        #theWs = [(c.eps * i/ (press - i)) for i in es]
         # Limit ws values so rootfinder doesn't blow up.       
         #theWs = list(replaceelem(theWs,0,0.060))
     elif pressIsVect:
-        theWs = [(c.eps * es/ (i - es)) for i in press]
+        theWs = c.eps*es/(press - es)
+        #theWs = [(c.eps * es/ (i - es)) for i in press]
         # Limit ws values so rootfinder doesn't blow up.       
         #theWs = list(replaceelem(theWs,0,0.060))
     else: # Neither 'es' nor 'press' in a vector.
@@ -90,7 +92,9 @@ def wsat(Temp, press):
         if theWs > 0.060: theWs = 0.060
         elif theWs < 0: theWs = 0
     else:
-        theWs = list(replaceelem(theWs, 0, 0.060))
+         theWs[theWs < 0] = 0
+         theWs[theWs > 0.060] = 0.060
+    #    theWs = list(replaceelem(theWs, 0, 0.060))
 
     return theWs
 
