@@ -62,7 +62,7 @@ def thetaes(T, p):
                                 
     return thetaep
 
-def findTmoist(thetaE0, press, q, ql):
+def findTmoist(thetaE0, press):
     """
     findTmoist(thetaE0, press)
     
@@ -93,22 +93,22 @@ def findTmoist(thetaE0, press, q, ql):
     # First determine if press can be indexed
     try: len(press)
     except: #press is a single value
-        Temp = optimize.zeros.brenth(thetaEchange, 100, 370,  \
-                                        (thetaE0, press, q, ql), maxiter=1000);
+        Temp = optimize.zeros.brenth(thetaEchange, 50, 450,  \
+                                        (thetaE0, press), maxiter=1000);
     else: #press is a vector           
         Temp = []
         press = list(press)        
         for i in press:            
             # This assumes that the dewpoint is somewherebetween 
             # 250K and 350K.
-            Temp.append(optimize.zeros.brenth(thetaEchange, 100, \
-                                                 370, (thetaE0, i, q, ql)), maxiter=1000);
+            Temp.append(optimize.zeros.brenth(thetaEchange, 50, \
+                                                 450, (thetaE0, i)), maxiter=1000);
             #{'in Tmoist: ',i, result(i)}  
         
     return Temp
     
 
-def thetaEchange(Tguess, thetaE0, press, q, ql):
+def thetaEchange(Tguess, thetaE0, press):
     """
     thetaEchange(Tguess, thetaE0, press)
 
@@ -131,7 +131,9 @@ def thetaEchange(Tguess, thetaE0, press, q, ql):
         allowed by brenth.
         
     """
-    thetaEguess = thermo.theta_e(Tguess, press, q, ql);
+    q = wsat(Tguess, press)
+    #assume no liquid water
+    thetaEguess = thermo.theta_e(Tguess, press, q, 0);
     
     #when this result is small enough we're done
     theDiff = thetaEguess - thetaE0;

@@ -2,5 +2,4 @@
 
 from thermo import *
 
-__all__ = ['thermo',]
-
+__all__ = ['thermo','constants']
