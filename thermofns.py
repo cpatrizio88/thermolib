@@ -73,17 +73,6 @@ def e(r, p): return p*r/(epsilon + r)
 def e_star(T):
     return 100.*numpy.exp(53.67957 - 6743.769/T - 4.8451*numpy.log(T))
 
-#T in C, returns e_sat in Pa
-def e_sat(T):
-    return 1e2*6.112*numpy.exp((17.67*T)/(T+243.5))
-
-def de_satdT(T):
-    return (Lv0*e_sat(T-273.15))/(Rv*numpy.multiply(T,T))
-
-# T in C, p in Pa
-def w_sat(p, T):
-    return epsilon*e_sat(T)/(p-e_sat(T))
-
 #   saturation mixing ratio rs (Kg/Kg) from temperature t (K) and pressure P (Pa)
 def r_star(p, T):
     return epsilon*e_star(T)/(p - e_star(T))
